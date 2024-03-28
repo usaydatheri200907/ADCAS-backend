@@ -34,6 +34,12 @@ app.use("/audio", audioRouter);
 const patientsRouter = require("./routes/patientRoutes");
 app.use("/patients", patientsRouter);
 
+const doctorRoutes = require('./routes/doctorRoutes');
+const assistantRoutes = require('./routes/assistantRoutes');
+
+app.use('/doctor', doctorRoutes);
+app.use('/assistant', assistantRoutes);
+
 app.listen(3001, () => {
   console.log("Server is running on port 3001");
 });
