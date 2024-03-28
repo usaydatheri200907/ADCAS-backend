@@ -3,12 +3,17 @@ const router = express.Router();
 const Patient = require("../models/patient");
 
 // Create a patient
-router.post("/", async (req, res) => {
+router.post("/add", async (req, res) => {
   try {
+    const { name, age, gender, address, phoneNumber, email, appointmentHistory } = req.body;
     const patient = new Patient({
-      name: req.body.name,
-      age: req.body.age,
-      gender: req.body.gender
+      name,
+      age,
+      gender,
+      address,
+      phoneNumber,
+      email,
+      appointmentHistory
     });
     const newPatient = await patient.save();
     res.status(201).json(newPatient);
@@ -37,6 +42,18 @@ router.patch("/:id", getPatient, async (req, res) => {
   }
   if (req.body.gender != null) {
     res.patient.gender = req.body.gender;
+  }
+  if (req.body.address != null) {
+    res.patient.address = req.body.address;
+  }
+  if (req.body.phoneNumber != null) {
+    res.patient.phoneNumber = req.body.phoneNumber;
+  }
+  if (req.body.email != null) {
+    res.patient.email = req.body.email;
+  }
+  if (req.body.appointmentHistory != null) {
+    res.patient.appointmentHistory = req.body.appointmentHistory;
   }
   try {
     const updatedPatient = await res.patient.save();

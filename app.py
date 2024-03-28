@@ -1,4 +1,3 @@
-
 from flask import Flask, request, jsonify
 from vosk import Model, KaldiRecognizer
 import sys
@@ -11,6 +10,10 @@ app = Flask(__name__)
 @app.route('/convert', methods=['POST'])
 def convert_audio():
     try:
+        # Check if 'audio' file is present in the request
+        if 'audio' not in request.files:
+            return jsonify({'error': 'No audio file uploaded'}), 400
+
         audio = request.files['audio']
         audio_path = 'uploads/' + audio.filename
         audio.save(audio_path)
