@@ -141,4 +141,3 @@ if __name__ == '__main__':
 #         emit('transcription', {'transcription': result['text']}, namespace='/realtime')
 
 
-# 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
