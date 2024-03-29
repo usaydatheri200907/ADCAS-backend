@@ -20,7 +20,7 @@ model = whisper.load_model("medium")
 print(" Model loaded.")
 
 client = OpenAI(
-    api_key='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',
+    api_key='',
 )
 
 
@@ -140,3 +140,5 @@ if __name__ == '__main__':
 #         result = json.loads(recognizer.Result())
 #         emit('transcription', {'transcription': result['text']}, namespace='/realtime')
 
+
+# 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
