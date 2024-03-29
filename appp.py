@@ -128,8 +128,6 @@ if __name__ == '__main__':
 # print("Loading mic...")
 # mic = pyaudio.PyAudio()
 # print("Initializing stream...")
-
-
 # stream = mic.open(rate=16000, channels=1, format=pyaudio.paInt16, input=True, frames_per_buffer=8192)
 # print("Starting stream...")
 # stream.start_stream()
@@ -140,7 +138,7 @@ if __name__ == '__main__':
 # def handle_audio(audio_data):
 #     if recognizer.AcceptWaveform(audio_data):
 #         result = json.loads(recognizer.Result())
-#         emit('transcription', {'transcription': result['text']}, namespace='/realtime') hello 
+#         emit('transcription', {'transcription': result['text']}, namespace='/realtime')
 
 
-
+# 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
