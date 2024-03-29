@@ -1,55 +1,43 @@
-# from flask import Flask, request, jsonify
-# from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor
-# import whisper
-# import os
-# from flask_cors import CORS
-
-# app = Flask(__name__)
-# CORS(app)  # Add CORS support to your Flask app
-
-# # Load the Whisper model (choose the appropriate size, e.g., 'large')
-# model = whisper.load_model("large-v2")
-
-# def transcribe_audio():
-#     # Assuming the audio file is in the same directory as the script
-#     audio_file_path = "1.mp4"  # Use a relative path
-
-#     # Check if the audio file exists
-#     if not os.path.exists(audio_file_path):
-#         print(f"Audio file not found: {audio_file_path}")
-#         return
-
-#     # Transcribe the audio
-#     transcription = model.transcribe(audio_file_path, language='EN')
-#     # transcription = "hello"
-
-#     # Print the transcription
-#     print("Transcription:")
-#     print(transcription)
-#     with open("transcribed_text.txt", "w") as f:
-#         f.write(transcription["text"])
-
-#     return jsonify({'transcription': transcription["text"]})
-
-# if __name__ == '__main__':
-#     with app.app_context():  # Establish application context
-#         app.run(host='localhost', port=3001)
-#         transcribe_audio()
-
 
 from flask import Flask, request, jsonify
 from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor
 import whisper
 import os
 from flask_cors import CORS
+# from flask_socketio import SocketIO, send
+# from vosk import Model, KaldiRecognizer
+import pyaudio
+
 
 app = Flask(__name__)
 CORS(app)  # Add CORS support to your Flask app
+# socketio = SocketIO(app, cors_allowed_origins="*")
 
 print("Loading Whisper model...")
 # Load the Whisper model (choose the appropriate size, e.g., 'medium')
 model = whisper.load_model("medium")
 print("Whisper model loaded.")
+
+# print("Loading Vosk model...")
+# model = Model("D:\\FYP\\AudioPage\\ADCAS-backend\\Vosk\\vosk-model-small-en-in-0.4")
+# print("Loading recognizer...")
+# recognizer = KaldiRecognizer(model, 16000)
+# print("Loading mic...")
+# mic = pyaudio.PyAudio()
+# print("Initializing stream...")
+# stream = mic.open(rate=16000, channels=1, format=pyaudio.paInt16, input=True, frames_per_buffer=8192)
+# print("Starting stream...")
+# stream.start_stream()
+
+
+
+# @socketio.on('audio', namespace='/realtime')
+# def handle_audio(audio_data):
+#     if recognizer.AcceptWaveform(audio_data):
+#         result = json.loads(recognizer.Result())
+#         emit('transcription', {'transcription': result['text']}, namespace='/realtime')
+
+
 
 def transcribe_audio(audio_file_path):
     print(f"Transcribing audio file: {audio_file_path}")
@@ -91,5 +79,5 @@ def transcribe_endpoint():
 
 if __name__ == '__main__':
     print("Starting Flask server...")
-    app.run(host='localhost', port=3001)
+    app.run(host='localhost', port=5000)
     print("Flask server started.")

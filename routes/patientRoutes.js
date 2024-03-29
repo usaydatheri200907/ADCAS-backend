@@ -5,6 +5,7 @@ const Patient = require("../models/patient");
 // Create a patient
 router.post("/add", async (req, res) => {
   try {
+    console.log("helloo");
     const { name, age, gender, address, phoneNumber, email, appointmentHistory } = req.body;
     const patient = new Patient({
       name,
@@ -16,6 +17,7 @@ router.post("/add", async (req, res) => {
       appointmentHistory
     });
     const newPatient = await patient.save();
+    console.log(newPatient);
     res.status(201).json(newPatient);
   } catch (err) {
     res.status(400).json({ message: err.message });
